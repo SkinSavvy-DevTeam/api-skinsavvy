@@ -16,9 +16,7 @@ export class Server {
   }
 
   async start(): Promise<void> {
-    console.info(
-      `Server is listening on ${this.server.settings.host}:${this.server.settings.port}`
-    );
+    console.info(`Server is listening on ${this.server.info.uri}`);
     this.server.start();
   }
 }

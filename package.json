@@ -1,0 +1,20 @@
+{
+  "name": "api-skinsavvy",
+  "version": "1.0.0",
+  "description": "A RESTful Interface for the SkinSavvy App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "czg emoji"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "czg": "^1.9.1",
+    "prisma": "^5.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}

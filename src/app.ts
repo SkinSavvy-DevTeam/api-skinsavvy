@@ -1,5 +1,3 @@
-import {Server} from './server';
+import {init} from './server';
 
-const server = new Server();
-
-server.start();
+init();

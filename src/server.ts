@@ -1,22 +1,25 @@
-import * as Hapi from '@hapi/hapi';
+import {Server, ServerOptions} from '@hapi/hapi';
+import helloworld from './apis/helloworld';
 
-export class Server {
-  private server: Hapi.Server;
+const options: ServerOptions = {
+  port: process.env.PORT || 3821,
+  host: process.env.host || 'localhost',
+  routes: {
+    cors: {
+      origin: ['*'],
+    },
+  },
+};
 
-  constructor() {
-    this.server = Hapi.server({
-      port: process.env.PORT || 3821,
-      host: process.env.HOST || '0.0.0.0',
-      routes: {
-        cors: {
-          origin: ['*'],
-        },
-      },
-    });
-  }
+const server = new Server(options);
 
-  async start(): Promise<void> {
-    console.info(`Server is listening on ${this.server.info.uri}`);
-    this.server.start();
-  }
-}
+export const init = async () => {
+  await server.register([
+    {
+      plugin: helloworld,
+    },
+  ]);
+
+  server.start();
+  console.log(`Server is running on ${server.info.uri}`);
+};

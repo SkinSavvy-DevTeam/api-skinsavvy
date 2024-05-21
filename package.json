@@ -2,7 +2,7 @@
   "name": "api-skinsavvy",
   "version": "1.0.0",
   "description": "A RESTful Interface for the SkinSavvy App",
-  "main": "src/app.ts",
+  "main": "build/src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "commit": "czg emoji",
@@ -13,7 +13,8 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run lint",
-    "start:dev": "nodemon src/app.ts"
+    "start:dev": "nodemon src/app.ts",
+    "start": "node build/src/app.js"
   },
   "keywords": [],
   "author": "",

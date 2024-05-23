@@ -1,4 +1,9 @@
-import {Server, ServerOptions} from '@hapi/hapi';
+import {
+  Server,
+  ServerOptions,
+  ServerRegisterPluginObject,
+  PluginProperties,
+} from '@hapi/hapi';
 import helloworld from './apis/helloworld';
 
 const options: ServerOptions = {
@@ -14,11 +19,13 @@ const options: ServerOptions = {
 const server = new Server(options);
 
 export const init = async () => {
-  await server.register([
+  const plugins: Array<ServerRegisterPluginObject<PluginProperties>> = [
     {
       plugin: helloworld,
     },
-  ]);
+  ];
+
+  await server.register(plugins);
 
   server.start();
   console.log(`Server is running on ${server.info.uri}`);

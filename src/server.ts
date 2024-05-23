@@ -1,9 +1,7 @@
-import {
-  Server,
-  ServerOptions,
-  ServerRegisterPluginObject,
-  PluginProperties,
-} from '@hapi/hapi';
+import {Server, ServerOptions, ServerRegisterPluginObject} from '@hapi/hapi';
+import * as HapiSwagger from 'hapi-swagger';
+import * as Inert from '@hapi/inert';
+import * as Vision from '@hapi/vision';
 import helloworld from './apis/helloworld';
 
 const options: ServerOptions = {
@@ -17,11 +15,22 @@ const options: ServerOptions = {
 };
 
 const server = new Server(options);
+const swaggerOptions: HapiSwagger.RegisterOptions = {
+  info: {
+    title: 'SkinSavvy API Documentation',
+  },
+};
 
 export const init = async () => {
-  const plugins: Array<ServerRegisterPluginObject<PluginProperties>> = [
+  const plugins: Array<ServerRegisterPluginObject<any>> = [
+    Inert,
+    Vision,
     {
       plugin: helloworld,
+    },
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions,
     },
   ];
 

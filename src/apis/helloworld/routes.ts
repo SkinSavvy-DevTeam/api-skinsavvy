@@ -6,6 +6,9 @@ const routes = (handlers: HelloHandler): ServerRoute[] => [
     method: 'GET',
     path: '/helloworld',
     handler: handlers.getHelloWorldHandler,
+    options: {
+      tags: ['api'],
+    },
   },
 ];
 

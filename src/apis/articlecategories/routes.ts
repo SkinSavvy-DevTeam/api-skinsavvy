@@ -12,7 +12,7 @@ const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
     handler: handlers.postArticleCategory,
     options: {
       tags: ['api'],
-      description: 'Add new article category to the database',
+      description: 'Add a new article category',
       validate: {
         payload: ArticleCategorySchema,
       },

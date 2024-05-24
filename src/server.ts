@@ -12,6 +12,7 @@ import * as Vision from '@hapi/vision';
 import helloworld from './apis/helloworld';
 import articlecategories from './apis/articlecategories';
 import ClientError from './exceptions/ClientError';
+import {PrismaClientKnownRequestError} from '@prisma/client/runtime/library';
 
 const options: ServerOptions = {
   port: process.env.PORT || 3821,
@@ -51,20 +52,54 @@ export const init = async () => {
   server.ext(
     'onPreResponse',
     (request: Request, h: ResponseToolkit): ResponseObject | symbol => {
-      const response = request.response;
+      const {response} = request;
 
-      if (response instanceof ClientError) {
-        return h
+      if (response instanceof Error) {
+        if (response instanceof ClientError) {
+          const newResponse = h
+            .response({
+              status: 'fail',
+              message: response.message,
+            })
+            .code(response.statusCode);
+
+          return newResponse;
+        }
+
+        if (response instanceof PrismaClientKnownRequestError) {
+          /* Uncomment these to see error
+           * console.log(response.message, response.code);
+           */
+
+          if (response.code === 'P2002') {
+            const newResponse = h
+              .response({
+                status: 'fail',
+                message: 'Entry already exist',
+              })
+              .code(400);
+            return newResponse;
+          } else {
+            return h
+              .response({
+                status: 'fail',
+                message: `Some prisma client error with ${response.code} code`,
+              })
+              .code(400);
+          }
+        }
+
+        if (!response.isServer) return h.continue;
+
+        // Server ERROR
+        const serverErrorResponse = h
           .response({
-            status: 'fail',
-            message: response.message,
+            status: 'error',
+            message: 'terjadi kegagalan di server kami',
           })
-          .code(response.statusCode);
+          .code(500);
+        return serverErrorResponse;
       }
-
-      console.log(request);
-      console.log(response);
-
       return h.continue;
     }
   );

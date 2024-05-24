@@ -1,6 +1,9 @@
 import {ServerRoute} from '@hapi/hapi';
 import {ArticleCategoriesHandler} from './handler';
-import {ArticleCategorySchema} from '../../validators/article-category/schema';
+import {
+  ArticleCategoryResponseSchema,
+  ArticleCategorySchema,
+} from '../../validators/article-category/schema';
 
 const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
   {
@@ -12,6 +15,9 @@ const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
       description: 'Add new article category to the database',
       validate: {
         payload: ArticleCategorySchema,
+      },
+      response: {
+        schema: ArticleCategoryResponseSchema,
       },
     },
   },

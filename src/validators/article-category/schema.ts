@@ -6,3 +6,12 @@ export const ArticleCategorySchema = Joi.object({
     .required()
     .description('the category name with minimal of 3 chars'),
 });
+
+export const ArticleCategoryResponseSchema = Joi.object({
+  status: Joi.string().valid('success', 'fail'),
+  message: Joi.string(),
+  data: {
+    id: Joi.string(),
+    name: Joi.string(),
+  },
+});

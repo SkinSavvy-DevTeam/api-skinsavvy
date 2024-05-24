@@ -6,3 +6,5 @@ A RESTful Interface for the SkinSavvy App
 
 - [ ] Create `Articles` table
 - [ ] CRUD on `/articles` endpoint
+- [ ] Add responses example in the docs page
+- [ ] Meaningful message when client error emitted

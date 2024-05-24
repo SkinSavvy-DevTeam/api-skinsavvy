@@ -13,6 +13,7 @@ const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
     options: {
       tags: ['api'],
       description: 'Add a new article category',
+      notes: 'The name must at least have 3 chars',
       validate: {
         payload: ArticleCategorySchema,
       },

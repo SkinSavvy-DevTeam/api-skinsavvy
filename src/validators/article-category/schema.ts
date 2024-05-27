@@ -27,3 +27,15 @@ export const getAllArticleCategoriesResponseSchema = Joi.object({
     articleCategories: Joi.array().items(articleSchema),
   },
 });
+
+export const getArticleCategoryByIdParam = Joi.object({
+  id: Joi.string(),
+});
+
+export const getArticleCategoryByIdResponseSchema = Joi.object({
+  status: Joi.string(),
+  data: {
+    id: Joi.string(),
+    name: Joi.string(),
+  },
+});

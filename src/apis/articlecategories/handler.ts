@@ -1,6 +1,8 @@
 import {Request, ResponseToolkit} from '@hapi/hapi';
 import {ArticleCategoriesService} from '../../services/postgresql/ArticleCategoriesService';
 import {ArticleCategoryPayload} from '../../types/article-category-payload';
+import {request} from 'http';
+import {date} from 'joi';
 
 export class ArticleCategoriesHandler {
   private service: ArticleCategoriesService;
@@ -12,23 +14,40 @@ export class ArticleCategoriesHandler {
     const payload = request.payload as ArticleCategoryPayload;
     const {id, name} = await this.service.addArticleCategory(payload);
 
-    return h.response({
-      status: 'success',
-      message: 'New category added successfully',
-      data: {
-        id,
-        name,
-      },
-    });
+    return h
+      .response({
+        status: 'success',
+        message: 'New category added successfully',
+        data: {
+          id,
+          name,
+        },
+      })
+      .code(200);
   };
 
   getAllArticleCategories = async (request: Request, h: ResponseToolkit) => {
     const articleCategories = await this.service.retrieveArticleCategories();
 
+    return h
+      .response({
+        status: 'success',
+        data: {
+          articleCategories,
+        },
+      })
+      .code(200);
+  };
+
+  getCategoryById = async (request: Request, h: ResponseToolkit) => {
+    const {id} = request.params;
+    const category = await this.service.retrieveArticleCategoryById(id);
+
     return h.response({
       status: 'success',
       data: {
-        articleCategories,
+        id: category.id,
+        name: category.name,
       },
     });
   };

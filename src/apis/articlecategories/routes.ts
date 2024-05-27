@@ -4,6 +4,8 @@ import {
   postArticleCategoryResponseSchema,
   postArticleCategoryPayloadSchema,
   getAllArticleCategoriesResponseSchema,
+  getArticleCategoryByIdParam,
+  getArticleCategoryByIdResponseSchema,
 } from '../../validators/article-category/schema';
 
 const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
@@ -32,6 +34,21 @@ const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
       description: 'Retrieve all available article categories',
       response: {
         schema: getAllArticleCategoriesResponseSchema,
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/article-categories/{id}',
+    handler: handlers.getCategoryById,
+    options: {
+      tags: ['api'],
+      description: 'Retrieve specific article category',
+      validate: {
+        params: getArticleCategoryByIdParam,
+      },
+      response: {
+        schema: getArticleCategoryByIdResponseSchema,
       },
     },
   },

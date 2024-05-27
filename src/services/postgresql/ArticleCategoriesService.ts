@@ -3,6 +3,7 @@ import {prisma} from './client';
 import InvariantError from '../../exceptions/InvariantError';
 import {ArticleCategoryPayload} from '../../types/article-category-payload';
 import {nanoid} from 'nanoid';
+import NotFoundError from '../../exceptions/NotFoundError';
 
 export class ArticleCategoriesService {
   private prisma: PrismaClient;
@@ -32,5 +33,19 @@ export class ArticleCategoriesService {
     const allCategories = await prisma.articleCategories.findMany();
 
     return allCategories;
+  };
+
+  retrieveArticleCategoryById = async (id: string) => {
+    const result = await prisma.articleCategories.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!result) {
+      throw new NotFoundError(`Article with category ${id} is not found`);
+    }
+
+    return result;
   };
 }

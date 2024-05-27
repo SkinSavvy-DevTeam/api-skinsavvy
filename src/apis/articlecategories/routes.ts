@@ -1,11 +1,11 @@
 import {ServerRoute} from '@hapi/hapi';
 import {ArticleCategoriesHandler} from './handler';
 import {
-  postArticleCategoryResponseSchema,
-  postArticleCategoryPayloadSchema,
-  getAllArticleCategoriesResponseSchema,
-  getArticleCategoryByIdParam,
-  getArticleCategoryByIdResponseSchema,
+  postResponseSchema,
+  postPayloadSchema,
+  getAllResponseSchema,
+  getByIdParamSchema,
+  getByIdResponseSchema,
 } from '../../validators/article-category/schema';
 
 const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
@@ -18,10 +18,10 @@ const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
       description: 'Add a new article category',
       notes: 'The name must at least have 3 chars',
       validate: {
-        payload: postArticleCategoryPayloadSchema,
+        payload: postPayloadSchema,
       },
       response: {
-        schema: postArticleCategoryResponseSchema,
+        schema: postResponseSchema,
       },
     },
   },
@@ -33,7 +33,7 @@ const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
       tags: ['api'],
       description: 'Retrieve all available article categories',
       response: {
-        schema: getAllArticleCategoriesResponseSchema,
+        schema: getAllResponseSchema,
       },
     },
   },
@@ -45,10 +45,10 @@ const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
       tags: ['api'],
       description: 'Retrieve specific article category',
       validate: {
-        params: getArticleCategoryByIdParam,
+        params: getByIdParamSchema,
       },
       response: {
-        schema: getArticleCategoryByIdResponseSchema,
+        schema: getByIdResponseSchema,
       },
     },
   },

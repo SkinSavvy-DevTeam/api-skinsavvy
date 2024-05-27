@@ -43,7 +43,7 @@ export class ArticleCategoriesService {
     });
 
     if (!articleCategory) {
-      throw new NotFoundError(`Article with category ${id} is not found`);
+      throw new NotFoundError(`Article category with id ${id} was not found`);
     }
 
     return articleCategory;

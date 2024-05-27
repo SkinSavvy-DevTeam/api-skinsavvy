@@ -16,7 +16,7 @@ import {PrismaClientKnownRequestError} from '@prisma/client/runtime/library';
 
 const options: ServerOptions = {
   port: process.env.PORT || 3821,
-  host: process.env.host || 'localhost',
+  host: process.env.HOST || 'localhost',
   routes: {
     cors: {
       origin: ['*'],

@@ -51,4 +51,21 @@ export class ArticleCategoriesHandler {
       },
     });
   };
+
+  putArticleCategoryById = async (request: Request, h: ResponseToolkit) => {
+    const {id} = request.params;
+    const {name} = request.payload as ArticleCategoryPayload;
+    const {name: newName} = await this.service.updateArticleCategoryById(
+      id,
+      name
+    );
+
+    return h.response({
+      status: 'success',
+      message: 'Successfully update name of the article category',
+      data: {
+        name: newName,
+      },
+    });
+  };
 }

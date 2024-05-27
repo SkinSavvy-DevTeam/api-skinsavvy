@@ -6,6 +6,9 @@ import {
   getAllResponseSchema,
   getByIdParamSchema,
   getByIdResponseSchema,
+  putByIdparamSchema,
+  putByIdResponseSchema,
+  putByIdPayloadSchema,
 } from '../../validators/article-category/schema';
 
 const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
@@ -49,6 +52,22 @@ const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
       },
       response: {
         schema: getByIdResponseSchema,
+      },
+    },
+  },
+  {
+    method: 'PUT',
+    path: '/article-categories/{id}',
+    handler: handlers.putArticleCategoryById,
+    options: {
+      tags: ['api'],
+      description: 'Update name of article category using an id',
+      validate: {
+        params: putByIdparamSchema,
+        payload: putByIdPayloadSchema,
+      },
+      response: {
+        schema: putByIdResponseSchema,
       },
     },
   },

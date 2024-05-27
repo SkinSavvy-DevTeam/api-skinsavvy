@@ -39,3 +39,19 @@ export const getByIdResponseSchema = Joi.object({
     name: Joi.string(),
   },
 });
+
+export const putByIdparamSchema = Joi.object({
+  id: Joi.string(),
+});
+
+export const putByIdPayloadSchema = Joi.object({
+  name: Joi.string(),
+});
+
+export const putByIdResponseSchema = Joi.object({
+  status: Joi.string().valid('success', 'fail'),
+  message: Joi.string(),
+  data: {
+    name: Joi.string(),
+  },
+});

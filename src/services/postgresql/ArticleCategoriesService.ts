@@ -36,16 +36,29 @@ export class ArticleCategoriesService {
   };
 
   retrieveArticleCategoryById = async (id: string) => {
-    const result = await prisma.articleCategories.findUnique({
+    const articleCategory = await prisma.articleCategories.findUnique({
       where: {
         id,
       },
     });
 
-    if (!result) {
+    if (!articleCategory) {
       throw new NotFoundError(`Article with category ${id} is not found`);
     }
 
-    return result;
+    return articleCategory;
+  };
+
+  updateArticleCategoryById = async (id: string, name: string) => {
+    const updatedArticleCategory = await prisma.articleCategories.update({
+      where: {
+        id,
+      },
+      data: {
+        name,
+      },
+    });
+
+    return updatedArticleCategory;
   };
 }

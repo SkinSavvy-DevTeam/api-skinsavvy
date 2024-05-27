@@ -68,4 +68,15 @@ export class ArticleCategoriesHandler {
       },
     });
   };
+
+  deleteArticleCategoryById = async (request: Request, h: ResponseToolkit) => {
+    const {id} = request.params;
+
+    const {id: idDeleted} = await this.service.deleteArticleCategoryById(id);
+
+    return h.response({
+      status: 'success',
+      message: `Article category with id of ${idDeleted} deleted successfully`,
+    });
+  };
 }

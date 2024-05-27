@@ -78,12 +78,22 @@ export const init = async () => {
                 message: 'Entry already exist',
               })
               .code(400);
+
+            return newResponse;
+          } else if (response.code === 'P2025') {
+            const newResponse = h
+              .response({
+                status: 'fail',
+                message: 'Resource not found',
+              })
+              .code(404);
+
             return newResponse;
           } else {
             return h
               .response({
                 status: 'fail',
-                message: `Some prisma client error with ${response.code} code`,
+                message: `Prisma client error occured with ${response.code} code.`,
               })
               .code(400);
           }

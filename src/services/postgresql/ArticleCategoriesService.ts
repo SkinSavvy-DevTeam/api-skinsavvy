@@ -61,4 +61,14 @@ export class ArticleCategoriesService {
 
     return updatedArticleCategory;
   };
+
+  deleteArticleCategoryById = async (id: string) => {
+    const deletedEntry = await prisma.articleCategories.delete({
+      where: {
+        id,
+      },
+    });
+
+    return deletedEntry;
+  };
 }

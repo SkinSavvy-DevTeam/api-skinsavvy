@@ -9,6 +9,8 @@ import {
   putByIdparamSchema,
   putByIdResponseSchema,
   putByIdPayloadSchema,
+  deleteByIdParamSchema,
+  deleteByIdResponseSchema,
 } from '../../validators/article-category/schema';
 
 const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
@@ -68,6 +70,21 @@ const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
       },
       response: {
         schema: putByIdResponseSchema,
+      },
+    },
+  },
+  {
+    method: 'DELETE',
+    path: '/article-categories/{id}',
+    handler: handlers.deleteArticleCategoryById,
+    options: {
+      tags: ['api'],
+      description: 'Delete specified article category using id',
+      validate: {
+        params: deleteByIdParamSchema,
+      },
+      response: {
+        schema: deleteByIdResponseSchema,
       },
     },
   },

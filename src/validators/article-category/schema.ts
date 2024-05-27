@@ -55,3 +55,12 @@ export const putByIdResponseSchema = Joi.object({
     name: Joi.string(),
   },
 });
+
+export const deleteByIdParamSchema = Joi.object({
+  id: Joi.string(),
+});
+
+export const deleteByIdResponseSchema = Joi.object({
+  status: Joi.string(),
+  message: Joi.string(),
+});

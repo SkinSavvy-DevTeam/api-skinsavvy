@@ -1,8 +1,6 @@
 import {Request, ResponseToolkit} from '@hapi/hapi';
 import {ArticleCategoriesService} from '../../services/postgresql/ArticleCategoriesService';
 import {ArticleCategoryPayload} from '../../types/article-category-payload';
-import {request} from 'http';
-import {date} from 'joi';
 
 export class ArticleCategoriesHandler {
   private service: ArticleCategoriesService;

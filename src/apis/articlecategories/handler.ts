@@ -21,4 +21,15 @@ export class ArticleCategoriesHandler {
       },
     });
   };
+
+  getAllArticleCategories = async (request: Request, h: ResponseToolkit) => {
+    const articleCategories = await this.service.retrieveArticleCategories();
+
+    return h.response({
+      status: 'success',
+      data: {
+        articleCategories,
+      },
+    });
+  };
 }

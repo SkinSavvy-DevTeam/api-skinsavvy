@@ -27,4 +27,10 @@ export class ArticleCategoriesService {
 
     return newCategory;
   };
+
+  retrieveArticleCategories = async () => {
+    const allCategories = await prisma.articleCategories.findMany();
+
+    return allCategories;
+  };
 }

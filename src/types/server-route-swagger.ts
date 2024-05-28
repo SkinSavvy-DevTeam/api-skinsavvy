@@ -4,6 +4,9 @@ export interface ServerRouteSwagger extends ServerRoute {
   options: {
     tags: string[];
     description: string;
-    notes: string;
+    notes?: string;
+    validate?: {
+      payload?: object;
+    };
   };
 }

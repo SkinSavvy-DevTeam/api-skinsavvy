@@ -9,10 +9,13 @@ import {
 import * as HapiSwagger from 'hapi-swagger';
 import * as Inert from '@hapi/inert';
 import * as Vision from '@hapi/vision';
-import helloworld from './apis/helloworld';
-import articlecategories from './apis/articlecategories';
 import ClientError from './exceptions/ClientError';
 import {PrismaClientKnownRequestError} from '@prisma/client/runtime/library';
+
+// PLUGINS
+import helloworld from './apis/helloworld';
+import articlecategories from './apis/articlecategories';
+import skindiseases from './apis/skindiseases';
 
 const options: ServerOptions = {
   port: process.env.PORT || 3821,
@@ -44,6 +47,9 @@ export const init = async () => {
     },
     {
       plugin: articlecategories,
+    },
+    {
+      plugin: skindiseases,
     },
   ];
 

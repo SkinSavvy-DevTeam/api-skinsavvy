@@ -57,4 +57,14 @@ export class SkinDiseasesHandler {
       },
     });
   };
+
+  deleteSkinDiseaseById = async (request: Request, h: ResponseToolkit) => {
+    const {id} = request.params;
+    const deleted = await this.service.deleteById(id);
+
+    return h.response({
+      status: 'success',
+      message: `Resource with id of ${deleted.id} successfully deleted`,
+    });
+  };
 }

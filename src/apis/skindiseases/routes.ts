@@ -8,6 +8,7 @@ import {
   getByIdResponseSchema,
   idSchema,
   putByIdResponseSchema,
+  deleteByIdResponseSchema,
 } from '../../validators/skin-diseases/schema';
 
 const routes = (handlers: SkinDiseasesHandler): ServerRoute[] => [
@@ -72,6 +73,22 @@ const routes = (handlers: SkinDiseasesHandler): ServerRoute[] => [
       },
       response: {
         schema: putByIdResponseSchema,
+      },
+    },
+  },
+  {
+    method: 'DELETE',
+    path: '/skin-diseases/{id}',
+    handler: handlers.deleteSkinDiseaseById,
+    options: {
+      tags: ['api'],
+      description: 'Delete skin disease resource using an id',
+      notes: 'Please provide an id via request parameter',
+      validate: {
+        params: idParamSchema,
+      },
+      response: {
+        schema: deleteByIdResponseSchema,
       },
     },
   },

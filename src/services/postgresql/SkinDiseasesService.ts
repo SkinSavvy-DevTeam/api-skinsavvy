@@ -55,4 +55,14 @@ export default class SkinDiseasesService {
 
     return result;
   };
+
+  deleteById = async (id: string) => {
+    const deleted = await this.prisma.skinDiseases.delete({
+      where: {
+        id,
+      },
+    });
+
+    return deleted;
+  };
 }

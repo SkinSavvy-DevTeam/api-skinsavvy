@@ -40,3 +40,8 @@ export const putByIdResponseSchema = baseResponseSchema.keys({
     name: nameSchema,
   },
 });
+
+export const deleteByIdResponseSchema = Joi.object({
+  status: Joi.string(),
+  message: Joi.string(),
+});

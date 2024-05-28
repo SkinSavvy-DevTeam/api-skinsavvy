@@ -11,11 +11,12 @@ export default class SkinDiseasesService {
 
   add = async (name: string) => {
     const id = `skin-disease-${nanoid(20)}`;
+    const lowername = name.toLowerCase();
 
     const newEntry = await this.prisma.skinDiseases.create({
       data: {
         id,
-        name,
+        name: lowername,
       },
     });
 
@@ -38,6 +39,19 @@ export default class SkinDiseasesService {
     if (!result) {
       throw new NotFoundError(`Resource with id of ${id} was not found`);
     }
+
+    return result;
+  };
+
+  updateById = async (id: string, name: string) => {
+    const result = await this.prisma.skinDiseases.update({
+      where: {
+        id,
+      },
+      data: {
+        name,
+      },
+    });
 
     return result;
   };

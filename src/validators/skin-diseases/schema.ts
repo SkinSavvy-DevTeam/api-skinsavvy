@@ -31,6 +31,12 @@ export const getByIdResponseSchema = baseResponseSchema.keys({
   },
 });
 
-export const getByIdParamSchema = Joi.object({
+export const idParamSchema = Joi.object({
   id: idSchema,
+});
+
+export const putByIdResponseSchema = baseResponseSchema.keys({
+  data: {
+    name: nameSchema,
+  },
 });

@@ -4,9 +4,10 @@ import {
   basePayloadSchema,
   baseResponseSchema,
   getAllResponseSchema,
-  getByIdParamSchema,
+  idParamSchema,
   getByIdResponseSchema,
   idSchema,
+  putByIdResponseSchema,
 } from '../../validators/skin-diseases/schema';
 
 const routes = (handlers: SkinDiseasesHandler): ServerRoute[] => [
@@ -50,10 +51,27 @@ const routes = (handlers: SkinDiseasesHandler): ServerRoute[] => [
       notes:
         'Please attach a request parameter as an id. For instance, `/skin-diseases/someid-i243j_ughj`',
       validate: {
-        params: getByIdParamSchema,
+        params: idParamSchema,
       },
       response: {
         schema: getByIdResponseSchema,
+      },
+    },
+  },
+  {
+    method: 'PUT',
+    path: '/skin-diseases/{id}',
+    handler: handlers.putSkinDiseaseById,
+    options: {
+      tags: ['api'],
+      description: 'Update the name of a specified skin disease using an id',
+      notes: 'Please provide the skin disease id',
+      validate: {
+        params: idParamSchema,
+        payload: basePayloadSchema,
+      },
+      response: {
+        schema: putByIdResponseSchema,
       },
     },
   },

@@ -1,7 +1,6 @@
 import {Request, ResponseToolkit} from '@hapi/hapi';
 import SkinDiseasesService from '../../services/postgresql/SkinDiseasesService';
 import {SkinDiseasesPayload} from '../../types/skindiseases/payload';
-import {request} from 'http';
 
 export class SkinDiseasesHandler {
   private service: SkinDiseasesService;
@@ -41,6 +40,20 @@ export class SkinDiseasesHandler {
       status: 'success',
       data: {
         skinDisease: result,
+      },
+    });
+  };
+
+  putSkinDiseaseById = async (request: Request, h: ResponseToolkit) => {
+    const {name: newName} = request.payload as SkinDiseasesPayload;
+    const {id} = request.params;
+    const result = await this.service.updateById(id, newName);
+
+    return h.response({
+      status: 'success',
+      message: `Successfully update entry with id of ${id}`,
+      data: {
+        name: result.name,
       },
     });
   };

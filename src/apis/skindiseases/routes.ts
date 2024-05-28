@@ -3,6 +3,7 @@ import {SkinDiseasesHandler} from './handler';
 import {
   basePayloadSchema,
   baseResponseSchema,
+  getAllResponseSchema,
 } from '../../validators/skin-diseases/schema';
 
 const routes = (handlers: SkinDiseasesHandler): ServerRoute[] => [
@@ -19,6 +20,20 @@ const routes = (handlers: SkinDiseasesHandler): ServerRoute[] => [
       },
       response: {
         schema: baseResponseSchema,
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/skin-diseases',
+    handler: handlers.getAllSkinDiseases,
+    options: {
+      tags: ['api'],
+      description: 'Retrieve all skin diseases available in the database',
+      notes:
+        'This endpoint receives no parameter nor payload. Therefore, no need to attach any data',
+      response: {
+        schema: getAllResponseSchema,
       },
     },
   },

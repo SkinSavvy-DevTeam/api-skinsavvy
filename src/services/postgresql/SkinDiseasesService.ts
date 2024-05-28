@@ -8,7 +8,7 @@ export default class SkinDiseasesService {
     this.prisma = prisma;
   }
 
-  addSkinDisease = async (name: string) => {
+  add = async (name: string) => {
     const id = `skin-disease-${nanoid(20)}`;
 
     const newEntry = await this.prisma.skinDiseases.create({
@@ -19,5 +19,11 @@ export default class SkinDiseasesService {
     });
 
     return newEntry;
+  };
+
+  getAll = async () => {
+    const result = await this.prisma.skinDiseases.findMany();
+
+    return result;
   };
 }

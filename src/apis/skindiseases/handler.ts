@@ -32,4 +32,16 @@ export class SkinDiseasesHandler {
       },
     });
   };
+
+  getSkinDiseaseById = async (request: Request, h: ResponseToolkit) => {
+    const {id} = request.params;
+    const result = await this.service.getById(id);
+
+    return h.response({
+      status: 'success',
+      data: {
+        skinDisease: result,
+      },
+    });
+  };
 }

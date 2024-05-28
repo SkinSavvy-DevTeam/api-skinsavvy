@@ -1,6 +1,6 @@
 import * as Joi from 'joi';
 
-const idSchema = Joi.string().required();
+export const idSchema = Joi.string().required();
 const nameSchema = Joi.string()
   .min(3)
   .description('the skin disease name with minimum of 3 chars');
@@ -15,7 +15,7 @@ export const basePayloadSchema = Joi.object({
 });
 export const baseResponseSchema = Joi.object({
   status: Joi.string().valid('success', 'fail'),
-  message: Joi.string(),
+  message: Joi.string().optional(),
   data: dataSchema,
 });
 
@@ -23,4 +23,14 @@ export const getAllResponseSchema = baseResponseSchema.keys({
   data: {
     skinDiseases: Joi.array().items(dataSchema),
   },
+});
+
+export const getByIdResponseSchema = baseResponseSchema.keys({
+  data: {
+    skinDisease: dataSchema,
+  },
+});
+
+export const getByIdParamSchema = Joi.object({
+  id: idSchema,
 });

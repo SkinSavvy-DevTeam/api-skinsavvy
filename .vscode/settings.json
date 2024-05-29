@@ -5,5 +5,8 @@
   "editor.indentSize": "tabSize",
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   }
 }

@@ -17,3 +17,8 @@ model ArticleCategories {
   id   String @id @db.VarChar(50)
   name String @unique @db.Text
 }
+
+model SkinDiseases {
+  id   String @id @db.VarChar(50)
+  name String @unique @db.Text
+}

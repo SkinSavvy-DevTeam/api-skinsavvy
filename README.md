@@ -9,3 +9,4 @@ A RESTful Interface for the SkinSavvy App
 - [ ] Add responses example in the docs page
 - [ ] Meaningful message when client error emitted
 - [ ] Feature to provide solutions to skin diseases
+- [ ] CRUD Skin Dieseases

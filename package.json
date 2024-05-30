@@ -9,6 +9,7 @@
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
+    "generate": "prisma generate",
     "migrate": "prisma migrate deploy",
     "fix": "gts fix",
     "start:dev": "nodemon src/app.ts",

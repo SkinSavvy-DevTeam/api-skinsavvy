@@ -24,6 +24,8 @@ ARG PORT
 
 ENV PORT=${PORT}
 
+RUN npm run generate
+
 RUN npm run migrate
 
 EXPOSE ${PORT}

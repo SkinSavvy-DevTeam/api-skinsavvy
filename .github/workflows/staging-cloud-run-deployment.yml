@@ -52,7 +52,7 @@ env:
   PROJECT_ID: skinsavvy-staging # TODO: update Google Cloud project id
   GAR_LOCATION: asia-southeast2 # TODO: update Artifact Registry location
   GAR_REPOSITORY: skinsavvy-staging
-  SERVICE: staging-api-skinsavvy # TODO: update Cloud Run service name
+  SERVICE: skinsavvy-staging # TODO: update Cloud Run service name
   REGION: asia-southeast2 # TODO: update Cloud Run service region
 
 jobs:

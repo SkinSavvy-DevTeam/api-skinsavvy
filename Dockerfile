@@ -1,4 +1,4 @@
-FROM node:lts-iron
+FROM node:20-alpine
 
 RUN mkdir -p /home/app/node/api-skinsavvy
 

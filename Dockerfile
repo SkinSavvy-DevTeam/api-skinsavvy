@@ -10,10 +10,24 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
+RUN npm run compile
+
+ARG DATABASE_URL
+
+ENV DATABASE_URL=${DATABASE_URL}
+
+ARG HOST=0.0.0.0
+
+ENV HOST=${HOST}
+
+ARG PORT
+
+ENV PORT=${PORT}
+
+RUN npm run generate
 
 RUN npm run migrate
 
-EXPOSE 8080
+EXPOSE ${PORT}
 
 CMD [ "npm", "run", "start" ]

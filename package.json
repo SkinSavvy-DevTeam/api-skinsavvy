@@ -9,11 +9,9 @@
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
+    "generate": "prisma generate",
     "migrate": "prisma migrate deploy",
     "fix": "gts fix",
-    "prepare": "npm run compile",
-    "pretest": "npm run compile",
-    "posttest": "npm run lint",
     "start:dev": "nodemon src/app.ts",
     "start": "node build/src/app.js"
   },

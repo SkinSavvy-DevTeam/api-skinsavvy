@@ -12,6 +12,10 @@ COPY . .
 
 RUN npm run compile
 
+ARG DATABASE_URL
+
+ENV DATABASE_URL=${DATABASE_URL}
+
 RUN npm run migrate
 
 EXPOSE 8080

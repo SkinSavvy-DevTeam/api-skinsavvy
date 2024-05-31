@@ -35,6 +35,7 @@
     "@hapi/vision": "^7.0.3",
     "@prisma/client": "^5.14.0",
     "@types/hapi": "^18.0.14",
+    "dotenv": "^16.4.5",
     "hapi-swagger": "^17.2.1",
     "joi": "^17.13.1",
     "nanoid": "^3.3.7",

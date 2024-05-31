@@ -1,6 +1,8 @@
-# api-skinsavvy
+# SkinSavvy API
 
-A RESTful Interface for the SkinSavvy App
+[![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
+
+A RESTful interface to interact with the backend services.
 
 ## To-do 📜
 
@@ -10,3 +12,4 @@ A RESTful Interface for the SkinSavvy App
 - [ ] Meaningful message when client error emitted
 - [ ] Feature to provide solutions to skin diseases
 - [ ] CRUD Skin Dieseases
+- [ ] Update response status code

@@ -15,7 +15,6 @@ export class ArticleThumbnailsHandler {
 
   postThumbnailHandler = async (request: Request, h: ResponseToolkit) => {
     const {data: file} = request.payload as any;
-    console.log(file);
     const meta = file.hapi;
 
     const {tempFilePath, filename} = await this.storageService.writeFile(

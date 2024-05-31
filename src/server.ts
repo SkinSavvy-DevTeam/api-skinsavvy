@@ -16,6 +16,7 @@ import {PrismaClientKnownRequestError} from '@prisma/client/runtime/library';
 import helloworld from './apis/helloworld';
 import articlecategories from './apis/articlecategories';
 import skindiseases from './apis/skindiseases';
+import articlethumbnails from './apis/articlethumbnails';
 
 const options: ServerOptions = {
   port: process.env.PORT || 3821,
@@ -51,6 +52,9 @@ export const init = async () => {
     {
       plugin: skindiseases,
     },
+    {
+      plugin: articlethumbnails,
+    },
   ];
 
   await server.register(plugins);
@@ -59,7 +63,7 @@ export const init = async () => {
     'onPreResponse',
     (request: Request, h: ResponseToolkit): ResponseObject | symbol => {
       const {response} = request;
-
+      console.log(response);
       if (response instanceof Error) {
         if (response instanceof ClientError) {
           const newResponse = h
@@ -111,7 +115,13 @@ export const init = async () => {
         const serverErrorResponse = h
           .response({
             status: 'error',
-            message: 'terjadi kegagalan di server kami',
+            message:
+              'Something went wrong with the server. We are working on it immediately...',
+            details: {
+              name: response.name,
+              message: response.message,
+              code: response.output.statusCode,
+            },
           })
           .code(500);
         return serverErrorResponse;

@@ -1,0 +1,44 @@
+import ArticleThumbnailsStorage from '../../services/cloud-storage/ArticleThumbnailsStorage';
+import {Request, ResponseToolkit} from '@hapi/hapi';
+import ArticleThumbnailsService from '../../services/postgresql/ArticleThumbnailsService';
+
+export class ArticleThumbnailsHandler {
+  private storageService: ArticleThumbnailsStorage;
+  private databaseService: ArticleThumbnailsService;
+  constructor(
+    storageService: ArticleThumbnailsStorage,
+    databaseService: ArticleThumbnailsService
+  ) {
+    this.storageService = storageService;
+    this.databaseService = databaseService;
+  }
+
+  postThumbnailHandler = async (request: Request, h: ResponseToolkit) => {
+    const {data: file} = request.payload as any;
+    console.log(file);
+    const meta = file.hapi;
+
+    const {tempFilePath, filename} = await this.storageService.writeFile(
+      file,
+      meta
+    );
+
+    const publicUrl = await this.storageService.addObject(
+      tempFilePath,
+      filename
+    );
+
+    const result = await this.databaseService.addArticleThumbnail(
+      filename,
+      publicUrl
+    );
+
+    return h.response({
+      status: 'success',
+      message: 'Thumbnail uploaded successfully',
+      data: {
+        thumbnail: result,
+      },
+    });
+  };
+}

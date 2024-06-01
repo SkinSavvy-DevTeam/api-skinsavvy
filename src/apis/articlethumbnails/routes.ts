@@ -1,5 +1,9 @@
 import {ServerRoute} from '@hapi/hapi';
 import {ArticleThumbnailsHandler} from './handler';
+import {
+  getAllThumbnailResponseSchema,
+  postThumbnailResponseSchema,
+} from '../../validators/article-thumbnails/schema';
 
 const routes = (handlers: ArticleThumbnailsHandler): ServerRoute[] => [
   {
@@ -20,9 +24,24 @@ const routes = (handlers: ArticleThumbnailsHandler): ServerRoute[] => [
           output: 'stream',
         },
       },
+      response: {
+        schema: postThumbnailResponseSchema,
+      },
       // validate: {
       //   payload: postImageHeaderSchema,
       // },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/article-thumbnails',
+    handler: handlers.getAllThumbnails,
+    options: {
+      tags: ['api'],
+      description: 'Retrieve all thumbnails metadata',
+      response: {
+        schema: getAllThumbnailResponseSchema,
+      },
     },
   },
 ];

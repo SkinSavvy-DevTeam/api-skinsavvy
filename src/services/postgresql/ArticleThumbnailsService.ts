@@ -8,7 +8,7 @@ export default class ArticleThumbnailsService {
     this.prisma = prisma;
   }
 
-  addArticleThumbnail = async (filename: string, url: string) => {
+  add = async (filename: string, url: string) => {
     const id = `article-thumbnail-${nanoid(8)}`;
     const thumbnail = await this.prisma.articleThumbnails.create({
       data: {
@@ -19,5 +19,11 @@ export default class ArticleThumbnailsService {
     });
 
     return thumbnail;
+  };
+
+  getAll = async () => {
+    const thumbnails = await this.prisma.articleThumbnails.findMany();
+
+    return thumbnails;
   };
 }

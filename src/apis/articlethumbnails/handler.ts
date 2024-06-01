@@ -27,16 +27,25 @@ export class ArticleThumbnailsHandler {
       filename
     );
 
-    const result = await this.databaseService.addArticleThumbnail(
-      filename,
-      publicUrl
-    );
+    const result = await this.databaseService.add(filename, publicUrl);
 
     return h.response({
       status: 'success',
       message: 'Thumbnail uploaded successfully',
       data: {
         thumbnail: result,
+      },
+    });
+  };
+
+  getAllThumbnails = async (request: Request, h: ResponseToolkit) => {
+    const thumbnails = await this.databaseService.getAll();
+
+    return h.response({
+      status: 'success',
+      message: 'All thumbnails metadata successfully retrieved',
+      data: {
+        thumbnails,
       },
     });
   };

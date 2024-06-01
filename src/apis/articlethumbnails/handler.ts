@@ -29,13 +29,15 @@ export class ArticleThumbnailsHandler {
 
     const result = await this.databaseService.add(filename, publicUrl);
 
-    return h.response({
-      status: 'success',
-      message: 'Thumbnail uploaded successfully',
-      data: {
-        thumbnail: result,
-      },
-    });
+    return h
+      .response({
+        status: 'success',
+        message: 'Thumbnail uploaded successfully',
+        data: {
+          thumbnail: result,
+        },
+      })
+      .code(201);
   };
 
   getAllThumbnails = async (request: Request, h: ResponseToolkit) => {

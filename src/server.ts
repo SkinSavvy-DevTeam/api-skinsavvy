@@ -63,6 +63,7 @@ export const init = async () => {
     'onPreResponse',
     (request: Request, h: ResponseToolkit): ResponseObject | symbol => {
       const {response} = request;
+
       if (response instanceof Error) {
         if (response instanceof ClientError) {
           const newResponse = h

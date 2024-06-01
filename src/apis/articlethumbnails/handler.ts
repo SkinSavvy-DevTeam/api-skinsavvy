@@ -1,6 +1,7 @@
 import ArticleThumbnailsStorage from '../../services/cloud-storage/ArticleThumbnailsStorage';
 import {Request, ResponseToolkit} from '@hapi/hapi';
 import ArticleThumbnailsService from '../../services/postgresql/ArticleThumbnailsService';
+import {ArticleThumbnailQuery} from '../../types/skinthumbnails/query';
 
 export class ArticleThumbnailsHandler {
   private storageService: ArticleThumbnailsStorage;
@@ -41,7 +42,8 @@ export class ArticleThumbnailsHandler {
   };
 
   getAllThumbnails = async (request: Request, h: ResponseToolkit) => {
-    const thumbnails = await this.databaseService.getAll();
+    const query = request.query as ArticleThumbnailQuery;
+    const thumbnails = await this.databaseService.getAll(query);
 
     return h.response({
       status: 'success',

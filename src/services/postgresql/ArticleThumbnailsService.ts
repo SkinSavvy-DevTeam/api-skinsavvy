@@ -1,6 +1,7 @@
 import {PrismaClient} from '@prisma/client';
 import {nanoid} from 'nanoid';
 import {prisma} from './client';
+import {ArticleThumbnailQuery} from '../../types/skinthumbnails/query';
 
 export default class ArticleThumbnailsService {
   private prisma: PrismaClient;
@@ -21,7 +22,18 @@ export default class ArticleThumbnailsService {
     return thumbnail;
   };
 
-  getAll = async () => {
+  getAll = async ({filterName}: ArticleThumbnailQuery) => {
+    if (filterName) {
+      const filteredThumbnails = await this.prisma.articleThumbnails.findMany({
+        where: {
+          filename: {
+            contains: filterName,
+          },
+        },
+      });
+
+      return filteredThumbnails;
+    }
     const thumbnails = await this.prisma.articleThumbnails.findMany();
 
     return thumbnails;

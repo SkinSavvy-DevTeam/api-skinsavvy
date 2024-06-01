@@ -9,22 +9,24 @@ import NotFoundError from '../../exceptions/NotFoundError';
 
 export default class ArticleThumbnailsStorage {
   private storage: Storage;
-  constructor() {
+  private bucketName: string;
+  constructor(bucketName: string) {
     this.storage = storage;
+    this.bucketName = bucketName;
   }
 
-  getOrCreateBucket = async (bucketName: string) => {
-    const bucket = await storage.bucket(bucketName);
+  private getOrCreateBucket = async () => {
+    const bucket = await storage.bucket(this.bucketName);
     try {
       const [metadata] = await bucket.getMetadata();
       if (!metadata) {
         throw new NotFoundError(
-          `Bucket ${bucketName} was not found. Creating one...`
+          `Bucket ${this.bucketName} was not found. Creating one...`
         );
       }
       return bucket;
     } catch (error) {
-      await storage.createBucket(bucketName);
+      await storage.createBucket(this.bucketName);
       return bucket;
     }
   };
@@ -33,7 +35,7 @@ export default class ArticleThumbnailsStorage {
     file: Readable,
     meta: {filename: string}
   ): Promise<{tempFilePath: string; filename: string}> => {
-    const filename = `article-thumbnail-${nanoid(8)}-${meta.filename}`;
+    const filename = `thumbnail-${nanoid(8)}-${meta.filename}`;
     const path = join(tmpdir(), filename);
 
     const fileStream = createWriteStream(path);
@@ -46,8 +48,9 @@ export default class ArticleThumbnailsStorage {
   };
 
   addObject = async (filePath: string, filename: string) => {
-    const bucketName = process.env.BUCKET_NAME as string;
-    const bucket = await this.getOrCreateBucket(bucketName);
+    // TODO: Refactor this bucket fetching method
+    const bucket = await this.getOrCreateBucket();
+
     await bucket.upload(filePath, {
       destination: filename,
       metadata: {
@@ -55,6 +58,7 @@ export default class ArticleThumbnailsStorage {
       },
     });
 
+    // Delete the temporary path
     unlinkSync(filePath);
 
     const file = bucket.file(filename);

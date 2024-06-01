@@ -8,7 +8,9 @@ const plugin = {
   name: 'ArticleThumbnails',
   version: '1.0.0',
   register: (server: Server) => {
-    const storageService = new ArticleThumbnailsStorage();
+    const bucketName = process.env.BUCKET_NAME as string;
+
+    const storageService = new ArticleThumbnailsStorage(bucketName);
     const databaseService = new ArticleThumbnailsService();
     const articleThumbnailsHandler = new ArticleThumbnailsHandler(
       storageService,

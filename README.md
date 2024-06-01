@@ -1,6 +1,7 @@
 # SkinSavvy API
 
 [![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
+![GitHub License](https://img.shields.io/github/license/SkinSavvy-DevTeam/api-skinsavvy)
 
 A RESTful interface to interact with the backend services.
 

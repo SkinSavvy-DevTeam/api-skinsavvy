@@ -1,6 +1,5 @@
 import {ServerRoute} from '@hapi/hapi';
 import {ArticleThumbnailsHandler} from './handler';
-import {postImageHeaderSchema} from '../../validators/article-thumbnails/schema';
 
 const routes = (handlers: ArticleThumbnailsHandler): ServerRoute[] => [
   {
@@ -10,7 +9,8 @@ const routes = (handlers: ArticleThumbnailsHandler): ServerRoute[] => [
     options: {
       tags: ['api'],
       description: 'Uploads a new thumbnail image to an online storage',
-      notes: 'Please use multipart/form-data',
+      notes:
+        'Please use multipart/form-data (file) with key name `image` and image file format such as `.png`, `.jpg`, `.jpeg`, `.gif`, `.webp`, `.apng`, and `.avif`.',
       payload: {
         allow: 'multipart/form-data',
         parse: true,
@@ -20,9 +20,9 @@ const routes = (handlers: ArticleThumbnailsHandler): ServerRoute[] => [
           output: 'stream',
         },
       },
-      validate: {
-        headers: postImageHeaderSchema,
-      },
+      // validate: {
+      //   payload: postImageHeaderSchema,
+      // },
     },
   },
 ];

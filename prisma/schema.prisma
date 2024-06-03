@@ -28,3 +28,9 @@ model ArticleThumbnails {
   filename String @db.Text
   url      String @unique @db.Text
 }
+
+model Articles {
+  id    String @id @db.VarChar(50)
+  title String @db.Text
+  body  String @db.Text
+}

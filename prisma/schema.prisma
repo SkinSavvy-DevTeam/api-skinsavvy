@@ -22,3 +22,9 @@ model SkinDiseases {
   id   String @id @db.VarChar(50)
   name String @unique @db.Text
 }
+
+model ArticleThumbnails {
+  id       String @id @db.VarChar(50)
+  filename String @db.Text
+  url      String @unique @db.Text
+}

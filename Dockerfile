@@ -30,8 +30,6 @@ ARG BUCKET_NAME
 
 ENV BUCKET_NAME=${BUCKET_NAME}
 
-# ENVIRONMENT VARIABLES
-
 RUN npm run generate
 
 RUN npm run migrate

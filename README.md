@@ -2,6 +2,7 @@
 
 [![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
 ![GitHub License](https://img.shields.io/github/license/SkinSavvy-DevTeam/api-skinsavvy)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/SkinSavvy-DevTeam/api-skinsavvy/staging-cloud-run-deployment.yml?branch=staging&label=build%20staging)
 
 A RESTful interface to interact with the backend services.
 

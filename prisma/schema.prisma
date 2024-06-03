@@ -14,8 +14,9 @@ datasource db {
 }
 
 model ArticleCategories {
-  id   String @id @db.VarChar(50)
-  name String @unique @db.Text
+  id           String         @id @db.VarChar(50)
+  name         String         @unique @db.Text
+  FullArticles FullArticles[]
 }
 
 model SkinDiseases {
@@ -24,13 +25,27 @@ model SkinDiseases {
 }
 
 model ArticleThumbnails {
-  id       String @id @db.VarChar(50)
-  filename String @db.Text
-  url      String @unique @db.Text
+  id           String         @id @db.VarChar(50)
+  filename     String         @db.Text
+  url          String         @unique @db.Text
+  FullArticles FullArticles[]
 }
 
 model Articles {
-  id    String @id @db.VarChar(50)
-  title String @db.Text
-  body  String @db.Text
+  id           String         @id @db.VarChar(50)
+  title        String         @db.Text
+  body         String         @db.Text
+  FullArticles FullArticles[]
+}
+
+model FullArticles {
+  article     Articles          @relation(fields: [articleId], references: [id])
+  articleId   String
+  category    ArticleCategories @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  thumbnail   ArticleThumbnails @relation(fields: [thumbnailId], references: [id])
+  thumbnailId String
+  assignedAt  DateTime          @default(now())
+
+  @@id([articleId, categoryId, thumbnailId])
 }

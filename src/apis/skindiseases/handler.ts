@@ -12,13 +12,15 @@ export class SkinDiseasesHandler {
     const {name} = request.payload as SkinDiseasesPayload;
     const result = await this.service.add(name);
 
-    return h.response({
-      status: 'success',
-      data: {
-        id: result.id,
-        name: result.name,
-      },
-    });
+    return h
+      .response({
+        status: 'success',
+        data: {
+          id: result.id,
+          name: result.name,
+        },
+      })
+      .code(201);
   };
 
   getAllSkinDiseases = async (request: Request, h: ResponseToolkit) => {

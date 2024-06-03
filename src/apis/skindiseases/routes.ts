@@ -6,7 +6,6 @@ import {
   getAllResponseSchema,
   idParamSchema,
   getByIdResponseSchema,
-  idSchema,
   putByIdResponseSchema,
   deleteByIdResponseSchema,
 } from '../../validators/skin-diseases/schema';

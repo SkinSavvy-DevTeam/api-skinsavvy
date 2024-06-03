@@ -21,7 +21,7 @@ export class ArticleCategoriesHandler {
           name,
         },
       })
-      .code(200);
+      .code(201);
   };
 
   getAllArticleCategories = async (request: Request, h: ResponseToolkit) => {

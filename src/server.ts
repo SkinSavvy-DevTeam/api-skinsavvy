@@ -16,6 +16,7 @@ import {PrismaClientKnownRequestError} from '@prisma/client/runtime/library';
 import helloworld from './apis/helloworld';
 import articlecategories from './apis/articlecategories';
 import skindiseases from './apis/skindiseases';
+import articlethumbnails from './apis/articlethumbnails';
 
 const options: ServerOptions = {
   port: process.env.PORT || 3821,
@@ -50,6 +51,9 @@ export const init = async () => {
     },
     {
       plugin: skindiseases,
+    },
+    {
+      plugin: articlethumbnails,
     },
   ];
 
@@ -111,7 +115,13 @@ export const init = async () => {
         const serverErrorResponse = h
           .response({
             status: 'error',
-            message: 'terjadi kegagalan di server kami',
+            message:
+              'Something went wrong with the server. We are working on it immediately...',
+            details: {
+              name: response.name,
+              message: response.message,
+              code: response.output.statusCode,
+            },
           })
           .code(500);
         return serverErrorResponse;

@@ -2,6 +2,7 @@ import {ServerRoute} from '@hapi/hapi';
 import {ArticleThumbnailsHandler} from './handler';
 import {
   getAllThumbnailResponseSchema,
+  getThumbnailsWithQueryByName,
   postThumbnailResponseSchema,
 } from '../../validators/article-thumbnails/schema';
 
@@ -38,9 +39,14 @@ const routes = (handlers: ArticleThumbnailsHandler): ServerRoute[] => [
     handler: handlers.getAllThumbnails,
     options: {
       tags: ['api'],
-      description: 'Retrieve all thumbnails metadata',
+      description:
+        'Retrieve all thumbnails metadata. This endpoint also provides a request query. ',
+      notes: 'Add a request query to get more specific result',
       response: {
         schema: getAllThumbnailResponseSchema,
+      },
+      validate: {
+        query: getThumbnailsWithQueryByName,
       },
     },
   },

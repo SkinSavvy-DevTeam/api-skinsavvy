@@ -43,3 +43,7 @@ export const getAllThumbnailResponseSchema = Joi.object({
     thumbnails: Joi.array().items(thumbnailSchema),
   },
 });
+
+export const getThumbnailsWithQueryByName = Joi.object({
+  filterByName: Joi.string().optional(),
+});

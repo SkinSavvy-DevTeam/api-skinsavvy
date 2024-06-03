@@ -14,3 +14,4 @@ A RESTful interface to interact with the backend services.
 - [ ] Feature to provide solutions to skin diseases
 - [ ] CRUD Skin Dieseases
 - [ ] Update response status code
+- [x] Add request query to docs

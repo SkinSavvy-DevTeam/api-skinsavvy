@@ -3,6 +3,7 @@ import {ArticleThumbnailsHandler} from './handler';
 import {
   getAllThumbnailResponseSchema,
   getThumbnailsWithQueryByName,
+  postImageHeaderSchema,
   postThumbnailResponseSchema,
 } from '../../validators/article-thumbnails/schema';
 
@@ -28,9 +29,14 @@ const routes = (handlers: ArticleThumbnailsHandler): ServerRoute[] => [
       response: {
         schema: postThumbnailResponseSchema,
       },
-      // validate: {
-      //   payload: postImageHeaderSchema,
-      // },
+      plugins: {
+        'hapi-swagger': {
+          payloadType: 'form',
+        },
+      },
+      validate: {
+        payload: postImageHeaderSchema,
+      },
     },
   },
   {

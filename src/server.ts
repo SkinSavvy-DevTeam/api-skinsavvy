@@ -17,6 +17,7 @@ import helloworld from './apis/helloworld';
 import articlecategories from './apis/articlecategories';
 import skindiseases from './apis/skindiseases';
 import articlethumbnails from './apis/articlethumbnails';
+import articles from './apis/articles';
 
 const options: ServerOptions = {
   port: process.env.PORT || 3821,
@@ -54,6 +55,9 @@ export const init = async () => {
     },
     {
       plugin: articlethumbnails,
+    },
+    {
+      plugin: articles,
     },
   ];
 

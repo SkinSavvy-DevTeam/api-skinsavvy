@@ -16,3 +16,4 @@ A RESTful interface to interact with the backend services.
 - [ ] CRUD Skin Dieseases
 - [ ] Update response status code
 - [x] Add request query to docs
+- [ ] To `POST` an article, user must attach the `thumbnailId`. Therefore, user either upload a new thumbnail first to get a `thumbnailId`, or retrieve one of the available thumbnail. Cuz you cannot send these two types of request simultaneously

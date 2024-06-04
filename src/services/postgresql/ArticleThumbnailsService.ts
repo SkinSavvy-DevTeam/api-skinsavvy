@@ -22,12 +22,12 @@ export default class ArticleThumbnailsService {
     return thumbnail;
   };
 
-  getAll = async ({filterName}: ArticleThumbnailQuery) => {
-    if (filterName) {
+  getAll = async ({filterByName}: ArticleThumbnailQuery) => {
+    if (filterByName) {
       const filteredThumbnails = await this.prisma.articleThumbnails.findMany({
         where: {
           filename: {
-            contains: filterName,
+            contains: filterByName,
           },
         },
       });
@@ -37,5 +37,13 @@ export default class ArticleThumbnailsService {
     const thumbnails = await this.prisma.articleThumbnails.findMany();
 
     return thumbnails;
+  };
+
+  verifyThumbnailExist = async (id: string) => {
+    await this.prisma.articleThumbnails.findUniqueOrThrow({
+      where: {
+        id,
+      },
+    });
   };
 }

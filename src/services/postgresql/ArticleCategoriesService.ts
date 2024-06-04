@@ -71,4 +71,6 @@ export class ArticleCategoriesService {
 
     return deletedEntry;
   };
+
+  generateArticleCategoryId = () => `article-category-${nanoid(8)}`;
 }

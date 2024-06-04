@@ -59,12 +59,33 @@ export default class ArticlesService {
             mode: 'insensitive',
           },
         },
-        select: {
-          fullArticles: true,
+        include: {
+          fullArticles: {
+            include: {
+              category: {
+                select: {
+                  name: true,
+                },
+              },
+              thumbnail: {
+                select: {
+                  url: true,
+                },
+              },
+            },
+          },
         },
       });
 
-      return fileteredArticle;
+      const formattedArticles = fileteredArticle.map(article => ({
+        id: article.id,
+        title: article.title,
+        body: article.body,
+        category: article.fullArticles[0].category.name,
+        thumbnailUrl: article.fullArticles[0].thumbnail.url,
+      }));
+
+      return formattedArticles;
     }
 
     const articles = await this.prisma.fullArticles.findMany({
@@ -93,8 +114,42 @@ export default class ArticlesService {
       title: article.article.title,
       body: article.article.body,
       category: article.category.name,
-      url: article.thumbnail.url,
+      thumbnailUrl: article.thumbnail.url,
     }));
     return formattedArticles;
+  };
+
+  retrieveById = async (id: string) => {
+    const article = await this.prisma.articles.findMany({
+      where: {
+        id,
+      },
+      include: {
+        fullArticles: {
+          include: {
+            category: {
+              select: {
+                name: true,
+              },
+            },
+            thumbnail: {
+              select: {
+                url: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const [formattedArticle] = article.map(a => ({
+      id: a.id,
+      title: a.title,
+      body: a.body,
+      category: a.fullArticles[0].category.name,
+      thumbnailUrl: a.fullArticles[0].thumbnail.url,
+    }));
+
+    return formattedArticle;
   };
 }

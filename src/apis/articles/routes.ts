@@ -1,6 +1,10 @@
 import {
+  getAllResponseSchema,
   getAllSchema,
+  getByIdResponseSchema,
+  getByIdSchema,
   postPayloadSchema,
+  postResponseSchema,
 } from '../../validators/articles/schemas';
 import {ArticlesHandler} from './handler';
 import {ServerRoute} from '@hapi/hapi';
@@ -18,6 +22,9 @@ const routes = (handlers: ArticlesHandler): ServerRoute[] => [
       validate: {
         payload: postPayloadSchema,
       },
+      response: {
+        schema: postResponseSchema,
+      },
     },
   },
   {
@@ -32,6 +39,24 @@ const routes = (handlers: ArticlesHandler): ServerRoute[] => [
         'If query is provided, endpoint will prioritize according to the query. If not, it will retrieve all the data',
       validate: {
         query: getAllSchema,
+      },
+      response: {
+        schema: getAllResponseSchema,
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/articles/{id}',
+    handler: handlers.getArticleById,
+    options: {
+      tags: ['api'],
+      description: 'Retrieve an article using an id',
+      validate: {
+        params: getByIdSchema,
+      },
+      response: {
+        schema: getByIdResponseSchema,
       },
     },
   },

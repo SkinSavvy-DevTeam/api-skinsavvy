@@ -8,3 +8,7 @@ export type ArticlePayload = {
 export type ArticleQuery = {
   filterByTitle: string;
 };
+
+export type ArticleIdPathParameter = {
+  id: string;
+};

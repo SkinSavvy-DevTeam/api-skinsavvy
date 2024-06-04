@@ -1,6 +1,10 @@
 import ArticlesService from '../../services/postgresql/ArticlesService';
 import {Request, ResponseToolkit} from '@hapi/hapi';
-import {ArticlePayload, ArticleQuery} from '../../types/articles/types';
+import {
+  ArticleIdPathParameter,
+  ArticlePayload,
+  ArticleQuery,
+} from '../../types/articles/types';
 import ArticleThumbnailsService from '../../services/postgresql/ArticleThumbnailsService';
 
 export class ArticlesHandler {
@@ -37,12 +41,25 @@ export class ArticlesHandler {
   getAllArticles = async (request: Request, h: ResponseToolkit) => {
     const query = request.query as ArticleQuery;
     const articles = await this.articleService.retrieveAll(query);
-    console.log(articles, query.filterByTitle);
     return h.response({
       status: 'success',
       message: 'Successfully retrieved all matched articles',
       data: {
         articles,
+      },
+    });
+  };
+
+  getArticleById = async (request: Request, h: ResponseToolkit) => {
+    const {id} = request.params as ArticleIdPathParameter;
+
+    const article = await this.articleService.retrieveById(id);
+
+    return h.response({
+      status: 'success',
+      message: `Successfully retrieve article with id ${article.id}`,
+      data: {
+        article,
       },
     });
   };

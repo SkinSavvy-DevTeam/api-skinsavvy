@@ -13,18 +13,40 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model ArticleCategories {
-  id   String @id @db.VarChar(50)
-  name String @unique @db.Text
-}
-
 model SkinDiseases {
   id   String @id @db.VarChar(50)
   name String @unique @db.Text
 }
 
+model ArticleCategories {
+  id           String         @id @db.VarChar(50)
+  name         String         @unique @db.Text
+  fullArticles FullArticles[]
+}
+
 model ArticleThumbnails {
-  id       String @id @db.VarChar(50)
-  filename String @db.Text
-  url      String @unique @db.Text
+  id           String         @id @db.VarChar(50)
+  filename     String         @db.Text
+  url          String         @unique @db.Text
+  fullArticles FullArticles[]
+}
+
+model Articles {
+  id           String         @id @db.VarChar(50)
+  title        String         @db.Text
+  body         String         @db.Text
+  fullArticles FullArticles[]
+}
+
+model FullArticles {
+  articleId   String
+  categoryId  String
+  thumbnailId String
+  assignedAt  DateTime @default(now())
+
+  article   Articles          @relation(fields: [articleId], references: [id])
+  category  ArticleCategories @relation(fields: [categoryId], references: [id])
+  thumbnail ArticleThumbnails @relation(fields: [thumbnailId], references: [id])
+
+  @@id([articleId, categoryId, thumbnailId])
 }

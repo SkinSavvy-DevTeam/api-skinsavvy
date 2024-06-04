@@ -1,3 +1,3 @@
 export type ArticleThumbnailQuery = {
-  filterName: string;
+  filterByName: string;
 };

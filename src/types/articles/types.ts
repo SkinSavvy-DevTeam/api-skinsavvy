@@ -4,3 +4,7 @@ export type ArticlePayload = {
   categoryName: string;
   thumbnailId: string;
 };
+
+export type ArticleQuery = {
+  filterByTitle: string;
+};

@@ -8,7 +8,6 @@ import {
 } from '../../types/articles/types';
 import {ArticleCategoriesService} from './ArticleCategoriesService';
 import {nanoid} from 'nanoid';
-import {title} from 'process';
 
 export default class ArticlesService {
   private prisma: PrismaClient;

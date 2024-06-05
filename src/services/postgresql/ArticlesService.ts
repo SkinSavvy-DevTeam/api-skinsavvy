@@ -1,6 +1,11 @@
 import {PrismaClient} from '@prisma/client';
 import {prisma} from './client';
-import {ArticlePayload, ArticleQuery} from '../../types/articles/types';
+import {
+  ArticleFilteredFormatted,
+  ArticleFormatted,
+  ArticlePayload,
+  ArticleQuery,
+} from '../../types/articles/types';
 import {ArticleCategoriesService} from './ArticleCategoriesService';
 import {nanoid} from 'nanoid';
 import {title} from 'process';
@@ -77,13 +82,15 @@ export default class ArticlesService {
         },
       });
 
-      const formattedArticles = fileteredArticle.map(article => ({
-        id: article.id,
-        title: article.title,
-        body: article.body,
-        category: article.fullArticles[0].category.name,
-        thumbnailUrl: article.fullArticles[0].thumbnail.url,
-      }));
+      const formattedArticles = fileteredArticle.map(
+        (article: ArticleFilteredFormatted) => ({
+          id: article.id,
+          title: article.title,
+          body: article.body,
+          category: article.fullArticles[0].category.name,
+          thumbnailUrl: article.fullArticles[0].thumbnail.url,
+        })
+      );
 
       return formattedArticles;
     }
@@ -109,7 +116,7 @@ export default class ArticlesService {
         },
       },
     });
-    const formattedArticles = articles.map(article => ({
+    const formattedArticles = articles.map((article: ArticleFormatted) => ({
       id: article.article.id,
       title: article.article.title,
       body: article.article.body,
@@ -142,7 +149,7 @@ export default class ArticlesService {
       },
     });
 
-    const [formattedArticle] = article.map(a => ({
+    const [formattedArticle] = article.map((a: ArticleFilteredFormatted) => ({
       id: a.id,
       title: a.title,
       body: a.body,

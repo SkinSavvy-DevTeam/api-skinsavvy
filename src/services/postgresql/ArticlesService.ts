@@ -9,6 +9,7 @@ import {
 import {ArticleCategoriesService} from './ArticleCategoriesService';
 import {nanoid} from 'nanoid';
 
+
 export default class ArticlesService {
   private prisma: PrismaClient;
   private categoryService: ArticleCategoriesService;
@@ -115,7 +116,9 @@ export default class ArticlesService {
         },
       },
     });
+
     const formattedArticles = articles.map((article: ArticleFormatted) => ({
+
       id: article.article.id,
       title: article.article.title,
       body: article.article.body,
@@ -149,6 +152,7 @@ export default class ArticlesService {
     });
 
     const [formattedArticle] = article.map((a: ArticleFilteredFormatted) => ({
+
       id: a.id,
       title: a.title,
       body: a.body,

@@ -46,3 +46,4 @@ export type ArticleFormatted = {
     url: string;
   };
 };
+

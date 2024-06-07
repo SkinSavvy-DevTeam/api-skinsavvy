@@ -98,7 +98,7 @@ jobs:
           wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
           chmod +x cloud_sql_proxy
           ./cloud_sql_proxy -instances=${{ secrets.CLOUDSQL_CONNECTION_NAME }}=tcp:5432 &
-          sleep 5 # Wait for the proxy to start
+          sleep 5
 
       - name: Build and Push Container
         run: |-

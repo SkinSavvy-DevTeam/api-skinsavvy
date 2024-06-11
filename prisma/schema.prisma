@@ -50,3 +50,26 @@ model FullArticles {
 
   @@id([articleId, categoryId, thumbnailId])
 }
+
+model Levels {
+  id             String            @id @db.VarChar(20)
+  name           String            @db.Text
+  LevelSolutions LevelsSolutions[]
+}
+
+model Solutions {
+  id             String            @id @db.VarChar(50)
+  title          String            @db.Text
+  body           String            @db.Text
+  LevelSolutions LevelsSolutions[]
+}
+
+model LevelsSolutions {
+  solutionId String
+  levelId    String
+
+  solution Solutions @relation(fields: [solutionId], references: [id])
+  level    Levels    @relation(fields: [levelId], references: [id])
+
+  @@id([solutionId, levelId])
+}

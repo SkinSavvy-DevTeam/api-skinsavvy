@@ -1,6 +1,9 @@
 import {ServerRoute} from '@hapi/hapi';
 import {SeverityLevelHandler} from './handler';
 import {
+  baseSchema,
+  getAllResponseSchema,
+  getSpecificLevelResponseSchema,
   postPayloadSchema,
   postResponseSchema,
 } from '../../validators/severity-levels/schemas';
@@ -20,6 +23,33 @@ const routes = (handlers: SeverityLevelHandler): ServerRoute[] => [
       },
       response: {
         schema: postResponseSchema,
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/severity-levels',
+    handler: handlers.getAllSeverityLevels,
+    options: {
+      tags: ['api'],
+      description: 'Retrieve all available levels',
+      response: {
+        schema: getAllResponseSchema,
+      },
+    },
+  },
+  {
+    method: 'GET',
+    path: '/severity-levels/{level}',
+    handler: handlers.getSpecificLevel,
+    options: {
+      tags: ['api'],
+      description: 'Retrieve specific level via level number',
+      validate: {
+        params: baseSchema,
+      },
+      response: {
+        schema: getSpecificLevelResponseSchema,
       },
     },
   },

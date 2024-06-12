@@ -111,7 +111,8 @@ export const init = async () => {
             return h
               .response({
                 status: 'fail',
-                message: `Prisma client error occured with ${response.code} code.`,
+                errorCode: response.code,
+                message: response.message,
               })
               .code(400);
           }

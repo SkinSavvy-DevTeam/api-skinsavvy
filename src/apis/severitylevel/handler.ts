@@ -22,4 +22,29 @@ export class SeverityLevelHandler {
       })
       .code(201);
   };
+
+  getAllSeverityLevels = async (request: Request, h: ResponseToolkit) => {
+    const levels = await this.severityLevelService.getAll();
+
+    return h.response({
+      status: 'success',
+      message: 'Successfully retrieve all available levels',
+      data: {
+        levels,
+      },
+    });
+  };
+
+  getSpecificLevel = async (request: Request, h: ResponseToolkit) => {
+    console.log(request.params);
+    const {level: levelParam} = request.params as {level: number};
+    const level = await this.severityLevelService.getByLevel(levelParam);
+    return h.response({
+      status: 'success',
+      message: 'Successfully retrieve specified level data',
+      data: {
+        level: level.level,
+      },
+    });
+  };
 }

@@ -18,3 +18,19 @@ export const postResponseSchema = Joi.object({
   message: Joi.string(),
   data: baseSchema,
 });
+
+export const getAllResponseSchema = Joi.object({
+  status: Joi.string(),
+  message: Joi.string(),
+  data: {
+    levels: Joi.array().items(baseSchema),
+  },
+});
+
+export const getSpecificLevelResponseSchema = Joi.object({
+  status: Joi.string(),
+  message: Joi.string(),
+  data: {
+    level: Joi.number().integer(),
+  },
+});

@@ -18,6 +18,7 @@ import articlecategories from './apis/articlecategories';
 import skindiseases from './apis/skindiseases';
 import articlethumbnails from './apis/articlethumbnails';
 import articles from './apis/articles';
+import severitylevel from './apis/severitylevel';
 
 const options: ServerOptions = {
   port: process.env.PORT || 3821,
@@ -58,6 +59,9 @@ export const init = async () => {
     },
     {
       plugin: articles,
+    },
+    {
+      plugin: severitylevel,
     },
   ];
 
@@ -123,8 +127,6 @@ export const init = async () => {
               'Something went wrong with the server. We are working on it immediately...',
             details: {
               name: response.name,
-              message: response.message,
-              code: response.output.statusCode,
             },
           })
           .code(500);

@@ -2,6 +2,8 @@ import {Request, ResponseToolkit} from '@hapi/hapi';
 import {ArticleCategoriesService} from '../../services/postgresql/ArticleCategoriesService';
 import {ArticleCategoryPayload} from '../../types/article-category-payload';
 
+// TODO: Update Implementation to `Categories`
+
 export class ArticleCategoriesHandler {
   private service: ArticleCategoriesService;
   constructor(service: ArticleCategoriesService) {
@@ -25,13 +27,13 @@ export class ArticleCategoriesHandler {
   };
 
   getAllArticleCategories = async (request: Request, h: ResponseToolkit) => {
-    const articleCategories = await this.service.retrieveArticleCategories();
+    const categories = await this.service.retrieveArticleCategories();
 
     return h
       .response({
         status: 'success',
         data: {
-          articleCategories,
+          categories,
         },
       })
       .code(200);

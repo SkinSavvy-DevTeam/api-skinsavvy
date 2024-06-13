@@ -19,6 +19,7 @@ import skindiseases from './apis/skindiseases';
 import articlethumbnails from './apis/articlethumbnails';
 import articles from './apis/articles';
 import severitylevel from './apis/severitylevel';
+import solutions from './apis/solutions';
 
 const options: ServerOptions = {
   port: process.env.PORT || 3821,
@@ -62,6 +63,9 @@ export const init = async () => {
     },
     {
       plugin: severitylevel,
+    },
+    {
+      plugin: solutions,
     },
   ];
 

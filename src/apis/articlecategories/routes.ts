@@ -16,7 +16,7 @@ import {
 const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
   {
     method: 'POST',
-    path: '/article-categories',
+    path: '/categories',
     handler: handlers.postArticleCategory,
     options: {
       tags: ['api'],
@@ -32,11 +32,11 @@ const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
   },
   {
     method: 'GET',
-    path: '/article-categories',
+    path: '/categories',
     handler: handlers.getAllArticleCategories,
     options: {
       tags: ['api'],
-      description: 'Retrieve all available article categories',
+      description: 'Retrieve all available categories',
       response: {
         schema: getAllResponseSchema,
       },
@@ -44,11 +44,11 @@ const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
   },
   {
     method: 'GET',
-    path: '/article-categories/{id}',
+    path: '/categories/{id}',
     handler: handlers.getCategoryById,
     options: {
       tags: ['api'],
-      description: 'Retrieve specific article category',
+      description: 'Retrieve specific category using an id',
       validate: {
         params: getByIdParamSchema,
       },
@@ -59,11 +59,11 @@ const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
   },
   {
     method: 'PUT',
-    path: '/article-categories/{id}',
+    path: '/categories/{id}',
     handler: handlers.putArticleCategoryById,
     options: {
       tags: ['api'],
-      description: 'Update name of article category using an id',
+      description: 'Update name of category using an id',
       validate: {
         params: putByIdparamSchema,
         payload: putByIdPayloadSchema,
@@ -75,11 +75,11 @@ const routes = (handlers: ArticleCategoriesHandler): ServerRoute[] => [
   },
   {
     method: 'DELETE',
-    path: '/article-categories/{id}',
+    path: '/categories/{id}',
     handler: handlers.deleteArticleCategoryById,
     options: {
       tags: ['api'],
-      description: 'Delete specified article category using id',
+      description: 'Delete specified category using id',
       validate: {
         params: deleteByIdParamSchema,
       },

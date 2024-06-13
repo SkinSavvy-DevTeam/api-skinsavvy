@@ -18,7 +18,7 @@ model SkinDiseases {
   name String @unique @db.Text
 }
 
-model ArticleCategories {
+model Categories {
   id           String         @id @db.VarChar(50)
   name         String         @unique @db.Text
   fullArticles FullArticles[]
@@ -45,7 +45,7 @@ model FullArticles {
   assignedAt  DateTime @default(now())
 
   article   Articles          @relation(fields: [articleId], references: [id])
-  category  ArticleCategories @relation(fields: [categoryId], references: [id])
+  category  Categories        @relation(fields: [categoryId], references: [id])
   thumbnail ArticleThumbnails @relation(fields: [thumbnailId], references: [id])
 
   @@id([articleId, categoryId, thumbnailId])

@@ -58,8 +58,7 @@ model Levels {
 
 model Solutions {
   id             String            @id @db.VarChar(50)
-  title          String            @db.Text
-  body           String            @db.Text
+  explanation    String            @db.Text
   LevelSolutions LevelsSolutions[]
 }
 

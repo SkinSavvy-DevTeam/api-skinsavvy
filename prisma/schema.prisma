@@ -18,6 +18,7 @@ model SkinDiseases {
   name String @unique @db.Text
 }
 
+
 model Categories {
   id           String         @id @db.VarChar(50)
   name         String         @unique @db.Text

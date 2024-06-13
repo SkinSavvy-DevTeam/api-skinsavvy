@@ -5,8 +5,8 @@ import {ArticleCategoryPayload} from '../../types/article-category-payload';
 import {nanoid} from 'nanoid';
 import NotFoundError from '../../exceptions/NotFoundError';
 
-// TODO: Rename all related codes to `Categories`
 
+// TODO: Rename all related codes to `Categories`
 export class ArticleCategoriesService {
   private prisma: PrismaClient;
   constructor() {
@@ -52,6 +52,7 @@ export class ArticleCategoriesService {
   };
 
   updateArticleCategoryById = async (id: string, name: string) => {
+
     const updatedArticleCategory = await prisma.categories.update({
       where: {
         id,
@@ -65,6 +66,7 @@ export class ArticleCategoriesService {
   };
 
   deleteArticleCategoryById = async (id: string) => {
+
     const deletedEntry = await prisma.categories.delete({
       where: {
         id,

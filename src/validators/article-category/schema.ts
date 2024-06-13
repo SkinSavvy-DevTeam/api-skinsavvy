@@ -24,7 +24,7 @@ export const postResponseSchema = Joi.object({
 export const getAllResponseSchema = Joi.object({
   status: Joi.string().valid('success', 'fail'),
   data: {
-    articleCategories: Joi.array().items(schema),
+    categories: Joi.array().items(schema),
   },
 });
 

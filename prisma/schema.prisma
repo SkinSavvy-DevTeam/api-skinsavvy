@@ -52,7 +52,9 @@ model FullArticles {
 }
 
 model Levels {
-  level           Int               @id @default(autoincrement())
+  id              String            @id @db.VarChar(50)
+  level           Int               @unique
+  name            String            @unique @db.Text
   LevelsSolutions LevelsSolutions[]
 }
 
@@ -64,10 +66,10 @@ model Solutions {
 
 model LevelsSolutions {
   solutionId String
-  levelId    Int
+  levelId    String
 
   solution Solutions @relation(fields: [solutionId], references: [id])
-  level    Levels    @relation(fields: [levelId], references: [level])
+  level    Levels    @relation(fields: [levelId], references: [id])
 
   @@id([solutionId, levelId])
 }

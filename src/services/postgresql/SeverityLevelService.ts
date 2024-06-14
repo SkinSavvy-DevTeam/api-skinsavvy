@@ -1,5 +1,6 @@
 import {PrismaClient} from '@prisma/client';
 import {prisma} from './client';
+import {nanoid} from 'nanoid';
 
 export default class SeverityLevelService {
   private prisma: PrismaClient;
@@ -7,14 +8,13 @@ export default class SeverityLevelService {
     this.prisma = prisma;
   }
 
-  add = async (level?: number) => {
-    if (!level) {
-      const autoIncrementLevel = await this.prisma.levels.create({});
-      return autoIncrementLevel;
-    }
+  add = async (name: string, level: number) => {
+    const id = `level-${nanoid(8)}`;
 
     const newLevel = await this.prisma.levels.create({
       data: {
+        id,
+        name,
         level,
       },
     });

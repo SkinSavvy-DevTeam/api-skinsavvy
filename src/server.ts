@@ -132,6 +132,7 @@ export const init = async () => {
               'Something went wrong with the server. We are working on it immediately...',
             details: {
               name: response.name,
+              stack: response.stack,
             },
           })
           .code(500);

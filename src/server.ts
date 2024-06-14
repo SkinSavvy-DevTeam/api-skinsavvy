@@ -15,7 +15,7 @@ import {PrismaClientKnownRequestError} from '@prisma/client/runtime/library';
 // PLUGINS
 import helloworld from './apis/helloworld';
 import articlecategories from './apis/articlecategories';
-import skindiseases from './apis/skindiseases';
+// import skindiseases from './apis/skindiseases';
 import articlethumbnails from './apis/articlethumbnails';
 import articles from './apis/articles';
 import severitylevel from './apis/severitylevel';
@@ -53,9 +53,9 @@ export const init = async () => {
     {
       plugin: articlecategories,
     },
-    {
-      plugin: skindiseases,
-    },
+    // {
+    //   plugin: skindiseases,
+    // },
     {
       plugin: articlethumbnails,
     },

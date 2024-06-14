@@ -22,4 +22,29 @@ export class SolutionsHandler {
       })
       .code(201);
   };
+
+  getAllSolutions = async (request: Request, h: ResponseToolkit) => {
+    const solutions = await this.solutionService.selectAll();
+
+    return h.response({
+      status: 'success',
+      message: 'Successfully retrieve all solutions',
+      data: {
+        solutions,
+      },
+    });
+  };
+
+  getSolutionById = async (request: Request, h: ResponseToolkit) => {
+    const {id} = request.params as {id: string};
+    const solution = await this.solutionService.selectById(id);
+
+    return h.response({
+      status: 'success',
+      message: 'Successfully retrieve a solution',
+      data: {
+        solution,
+      },
+    });
+  };
 }

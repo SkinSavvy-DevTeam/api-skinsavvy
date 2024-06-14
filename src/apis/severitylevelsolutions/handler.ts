@@ -29,4 +29,30 @@ export class SeverityLevelSolutionsHandler {
       })
       .code(201);
   };
+
+  getAllSeveritySolution = async (request: Request, h: ResponseToolkit) => {
+    const severityLevelSolutions =
+      await this.severitySolutionService.selectAll();
+    return h.response({
+      status: 'success',
+      message: 'Successfully retrieve all solutions and level',
+      data: {
+        severityLevelSolutions,
+      },
+    });
+  };
+
+  getByLevel = async (request: Request, h: ResponseToolkit) => {
+    const {level} = request.params as {level: number};
+    const severityLevelSolution =
+      await this.severitySolutionService.selectByLevel(level);
+
+    return h.response({
+      status: 'success',
+      message: 'Successfully retrieve solution with specified severity level',
+      data: {
+        severityLevelSolution,
+      },
+    });
+  };
 }

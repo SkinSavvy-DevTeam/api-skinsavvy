@@ -27,3 +27,25 @@ export const postResponseSchema = baseResponseSchema.keys({
     level: levelsSchema,
   },
 });
+
+export const getAllResponseSchema = baseResponseSchema.keys({
+  data: {
+    severityLevelSolutions: Joi.array().items({
+      solution: solutionsSchema,
+      level: levelsSchema,
+    }),
+  },
+});
+
+export const getByLevelParamSchema = Joi.object({
+  level: Joi.number().integer(),
+});
+
+export const getByLevelResponseSchema = baseResponseSchema.keys({
+  data: {
+    severityLevelSolution: {
+      solution: solutionsSchema,
+      level: levelsSchema,
+    },
+  },
+});

@@ -1,5 +1,4 @@
 import * as Joi from 'joi';
-import {title} from 'process';
 
 export const postPayloadSchema = Joi.object({
   title: Joi.string().min(3),

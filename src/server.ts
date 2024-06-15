@@ -15,9 +15,12 @@ import {PrismaClientKnownRequestError} from '@prisma/client/runtime/library';
 // PLUGINS
 import helloworld from './apis/helloworld';
 import articlecategories from './apis/articlecategories';
-import skindiseases from './apis/skindiseases';
+// import skindiseases from './apis/skindiseases';
 import articlethumbnails from './apis/articlethumbnails';
 import articles from './apis/articles';
+import severitylevel from './apis/severitylevel';
+import solutions from './apis/solutions';
+import severitylevelsolutions from './apis/severitylevelsolutions';
 
 const options: ServerOptions = {
   port: process.env.PORT || 3821,
@@ -50,14 +53,23 @@ export const init = async () => {
     {
       plugin: articlecategories,
     },
-    {
-      plugin: skindiseases,
-    },
+    // {
+    //   plugin: skindiseases,
+    // },
     {
       plugin: articlethumbnails,
     },
     {
       plugin: articles,
+    },
+    {
+      plugin: severitylevel,
+    },
+    {
+      plugin: solutions,
+    },
+    {
+      plugin: severitylevelsolutions,
     },
   ];
 
@@ -107,7 +119,8 @@ export const init = async () => {
             return h
               .response({
                 status: 'fail',
-                message: `Prisma client error occured with ${response.code} code.`,
+                errorCode: response.code,
+                message: response.message,
               })
               .code(400);
           }
@@ -123,8 +136,7 @@ export const init = async () => {
               'Something went wrong with the server. We are working on it immediately...',
             details: {
               name: response.name,
-              message: response.message,
-              code: response.output.statusCode,
+              stack: response.stack,
             },
           })
           .code(500);

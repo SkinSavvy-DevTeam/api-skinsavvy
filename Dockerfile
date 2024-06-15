@@ -1,8 +1,8 @@
 FROM node:20-alpine
 
 # Install Cloud SQL Proxy
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /cloud_sql_proxy && \
-  chmod +x /cloud_sql_proxy
+RUN wget -o cloud_sql_proxy https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.11.3/cloud-sql-proxy.linux.amd64 && \
+  chmod +x cloud_sql_proxy
 
 # Create the app directory
 RUN mkdir -p /home/app/node/api-skinsavvy
@@ -42,7 +42,7 @@ ENV CLOUDSQL_CONNECTION_NAME=${CLOUDSQL_CONNECTION_NAME}
 EXPOSE ${PORT}
 
 # Run Prisma generate and migrate, then start the app
-CMD /cloud_sql_proxy -instances=${CLOUDSQL_CONNECTION_NAME}=tcp:5432 & \
+CMD ./cloud_sql_proxy ${CLOUDSQL_CONNECTION_NAME} \
   until nc -z localhost 5432; do echo "Waiting for Cloud SQL Proxy..."; sleep 1; done && \
   npm run generate && \
   npm run migrate && \

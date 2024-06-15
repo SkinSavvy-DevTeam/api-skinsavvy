@@ -1,8 +1,10 @@
 # SkinSavvy API
 
+[![Production deployment](https://github.com/SkinSavvy-DevTeam/api-skinsavvy/actions/workflows/production-cloud-run-deployment.yml/badge.svg?branch=main)](https://github.com/SkinSavvy-DevTeam/api-skinsavvy/actions/workflows/production-cloud-run-deployment.yml)
+[![Staging deployment](https://github.com/SkinSavvy-DevTeam/api-skinsavvy/actions/workflows/staging-cloud-run-deployment.yml/badge.svg?branch=staging)](https://github.com/SkinSavvy-DevTeam/api-skinsavvy/actions/workflows/staging-cloud-run-deployment.yml)
+
 [![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
 ![GitHub License](https://img.shields.io/github/license/SkinSavvy-DevTeam/api-skinsavvy)
-[![Staging - Build and Deploy to Cloud Run](https://github.com/SkinSavvy-DevTeam/api-skinsavvy/actions/workflows/staging-cloud-run-deployment.yml/badge.svg?branch=main)](https://github.com/SkinSavvy-DevTeam/api-skinsavvy/actions/workflows/staging-cloud-run-deployment.yml)
 
 A RESTful interface to interact with the backend services.
 

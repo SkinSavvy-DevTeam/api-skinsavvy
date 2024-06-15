@@ -1,9 +1,5 @@
 FROM node:20-alpine
 
-# Install Cloud SQL Proxy
-RUN wget -o cloud_sql_proxy https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.11.3/cloud-sql-proxy.linux.amd64 && \
-  chmod +x cloud_sql_proxy
-
 # Create the app directory
 RUN mkdir -p /home/app/node/api-skinsavvy
 

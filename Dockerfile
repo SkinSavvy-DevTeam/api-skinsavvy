@@ -42,8 +42,12 @@ ENV CLOUDSQL_CONNECTION_NAME=${CLOUDSQL_CONNECTION_NAME}
 EXPOSE ${PORT}
 
 # Run Prisma generate and migrate, then start the app
-CMD sh -c './cloud_sql_proxy "${CLOUDSQL_CONNECTION_NAME}" \
-  until nc -z localhost 5432; do echo "Waiting for Cloud SQL Proxy..."; sleep 1; done && \
+CMD ["sh", "-c", "\
+  ./cloud_sql_proxy \"${CLOUDSQL_CONNECTION_NAME}\" \
+  until nc -z localhost 5432; do \
+  echo 'Waiting for Cloud SQL Proxy...'; \
+  sleep 1; \
+  done && \
   npm run generate && \
   npm run migrate && \
-  npm run start'
+  npm run start"]

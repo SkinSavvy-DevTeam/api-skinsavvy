@@ -42,7 +42,6 @@
 #   Container Registry vs Artifact Registry   - https://cloud.google.com/blog/products/application-development/understanding-artifact-registry-vs-container-registry
 #   Principle of least privilege              - https://cloud.google.com/blog/products/identity-security/dont-get-pwned-practicing-the-principle-of-least-privilege
 
-
 name: Staging - Build and Deploy to Cloud Run
 
 on:
@@ -106,8 +105,7 @@ jobs:
           docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}" ./ \
             --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} \
             --build-arg PORT=${{ env.PORT }} \
-            --build-arg BUCKET_NAME=${{ secrets.BUCKET_NAME }} \
-            --build-arg CLOUDSQL_CONNECTION_NAME=${{ secrets.CLOUDSQL_CONNECTION_NAME }}
+            --build-arg BUCKET_NAME=${{ secrets.BUCKET_NAME }}
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}"
 
       # END - Docker auth and build
